@@ -24,13 +24,17 @@ interface IcandlePosition {
 }
 
 function CandleChart({ coinId }: IChatPoprs) {
-  const { isLoading, data: queryData } = useQuery<IHistorical[]>({
+  const { isLoading, data: queryData } = useQuery<
+    IHistorical[]
+  >({
     queryKey: ["ohlcv", coinId],
     queryFn: () => fetchCoinHistory(coinId),
   });
-  const [posistionState, setPositionState] = useState<IcandlePosition[] | []>(
-    []
-  );
+  const [posistionState, setPositionState] = useState<
+    IcandlePosition[] | []
+  >([]);
+
+
 
   useEffect(() => {
     if (queryData) {
@@ -45,11 +49,6 @@ function CandleChart({ coinId }: IChatPoprs) {
       }
     }
   }, [queryData]);
-
-  /* 
-  console.log(isLoading);
-  console.log(mappedData); 
-  */
 
   return (
     <div>
@@ -99,8 +98,12 @@ function CandleChart({ coinId }: IChatPoprs) {
             },
             colors: ["#0fbcf9"],
             tooltip: {
+              x: {
+                formatter: (value) => new Date(value).toLocaleDateString(),
+              },
               y: {
-                formatter: (value) => `${value.toFixed(2)} USD`,
+                formatter: (value) =>
+                  `${value.toFixed(2)} USD`,
               },
             },
           }}

@@ -245,7 +245,7 @@ function Coin() {
             />
             <Route
               path="price"
-              element={<Price />}
+              element={<Price coinId={coinId} />}
             />
           </Routes>
           

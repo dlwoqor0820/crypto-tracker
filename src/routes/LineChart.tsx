@@ -3,13 +3,13 @@ import { fetchCoinHistory } from "./api";
 import ApexCharts from "react-apexcharts";
 
 interface IHistorical {
-  time_open: string;
-  time_close: string;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume: number;
+  time_open: number;
+  time_close: number;
+  open: string;
+  high: string;
+  low: string;
+  close: string;
+  volume: string;
   market_cap: number;
 }
 
@@ -32,7 +32,7 @@ function LineChart({ coinId }: IChatPoprs) {
           series={[
             {
               name: "Price",
-              data: data?.map((price) => price.close) as number[],
+              data: data?.map((price) => price.close) as unknown as number[],
             },
           ]}
           options={{

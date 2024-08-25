@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { fetchCoinHistory } from "./api";
 
 interface IHistorical {
-  time_open: string;
-  time_close: string;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume: number;
+  time_open: number;
+  time_close: number;
+  open: string;
+  high: string;
+  low: string;
+  close: string;
+  volume: string;
   market_cap: number;
 }
 
@@ -25,8 +25,9 @@ const PriceList = styled.div`
 const Items = styled.div`
   text-align: center;
   padding-bottom: 10px;
-  border-bottom: 1px solid;
-  border-color: #ffffff;
+  border-bottom: 10px solid;
+  border-radius: 30px;
+  border-color: ${(props) => props.theme.accentColor};;
   margin-bottom: 10px;
 `;
 

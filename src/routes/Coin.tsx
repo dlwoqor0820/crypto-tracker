@@ -78,7 +78,9 @@ const BackBtn = styled.div`
   align-items: center;
   height: 50px;
   width: 50px;
-  background-color: white;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.bgColor};
+  border: 2px solid ${(props) => props.theme.accentColor};;
   border-radius: 50px;
 `;
 
@@ -92,7 +94,9 @@ const Tab = styled.span<{ $isActive: boolean }>`
   padding: 7px 0px;
   border-radius: 10px;
   color: ${(props) =>
-    props.$isActive ? props.theme.accentColor : props.theme.textColor};
+    props.$isActive
+      ? props.theme.accentColor
+      : props.theme.textColor};
   a {
     display: block;
   }
@@ -168,28 +172,36 @@ function Coin() {
   const priceMatch = useMatch("/:coinId/price");
   const lineChartMatch = useMatch("/:coinId/lineChart");
   const candleChartMatch = useMatch("/:coinId/candleChart");
-  const { isLoading: infoLoading, data: infoData } = useQuery<IInfoData>({
-    queryKey: ["info", coinId],
-    queryFn: () => fetchCoinInfo(coinId),
-  });
-  const { isLoading: tickersLoading, data: tickersData } = useQuery<IPriceData>(
-    {
+  const { isLoading: infoLoading, data: infoData } =
+    useQuery<IInfoData>({
+      queryKey: ["info", coinId],
+      queryFn: () => fetchCoinInfo(coinId),
+    });
+  const { isLoading: tickersLoading, data: tickersData } =
+    useQuery<IPriceData>({
       queryKey: ["tickers", coinId],
       queryFn: () => fetchCoinTickers(coinId),
       //refetchInterval: 5000,
-    },
-  );
+    });
   const loading = infoLoading || tickersLoading;
   return (
     <Container>
       <Helmet>
         <title>
-          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+          {state?.name
+            ? state.name
+            : loading
+            ? "Loading..."
+            : infoData?.name}
         </title>
       </Helmet>
       <Header>
         <Title>
-          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+          {state?.name
+            ? state.name
+            : loading
+            ? "Loading..."
+            : infoData?.name}
         </Title>
       </Header>
       {loading ? (
@@ -207,7 +219,9 @@ function Coin() {
             </OverviewItem>
             <OverviewItem>
               <span>Price</span>
-              <span>{`$${tickersData?.quotes.USD.price.toFixed(3)}`}</span>
+              <span>{`$${tickersData?.quotes.USD.price.toFixed(
+                3,
+              )}`}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
@@ -224,10 +238,14 @@ function Coin() {
 
           <Tabs>
             <Tab $isActive={candleChartMatch !== null}>
-              <Link to={`/${coinId}/candleChart`}>Candle Chart</Link>
+              <Link to={`/${coinId}/candleChart`}>
+                Candle Chart
+              </Link>
             </Tab>
             <Tab $isActive={lineChartMatch !== null}>
-              <Link to={`/${coinId}/lineChart`}>Line Chart</Link>
+              <Link to={`/${coinId}/lineChart`}>
+                Line Chart
+              </Link>
             </Tab>
             <Tab $isActive={priceMatch !== null}>
               <Link to={`/${coinId}/price`}>Price</Link>
@@ -248,7 +266,7 @@ function Coin() {
               element={<Price coinId={coinId} />}
             />
           </Routes>
-          
+
           <BackBtn>
             <Link to="/">Back</Link>
           </BackBtn>

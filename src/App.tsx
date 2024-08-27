@@ -1,7 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import Router from "./routes/Router";
-import { createGlobalStyle } from "styled-components";
+import {
+  createGlobalStyle,
+  ThemeProvider,
+} from "styled-components";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { darkTheme, lightTheme } from "./theme";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./routes/atoms";
 
 const GlobalStyle = createGlobalStyle` //reset CSS
   html, body, div, span, applet, object, iframe,
@@ -66,25 +72,30 @@ const GlobalStyle = createGlobalStyle` //reset CSS
 `;
 
 function App() {
+  const isDark = useRecoilValue(isDarkAtom);
   return (
     <>
-      <Helmet>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        ></link>
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-        ></link>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Jua&family=Oswald:wght@200..700&display=swap"
-          rel="stylesheet"
-        ></link>
-      </Helmet>
-      <GlobalStyle />
-      <Router />
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ThemeProvider
+        theme={isDark ? darkTheme : lightTheme}
+      >
+        <Helmet>
+          <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+          ></link>
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+          ></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Jua&family=Oswald:wght@200..700&display=swap"
+            rel="stylesheet"
+          ></link>
+        </Helmet>
+        <GlobalStyle />
+        <Router />
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
     </>
   );
 }

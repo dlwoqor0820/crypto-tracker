@@ -271,9 +271,6 @@ function Coin() {
             <Link to="/">Back</Link>
           </BackBtn>
         </>
-        //Code Challenge//
-        //chart를 candlestick으로 바꾸기
-        //price 탭 만들기
       )}
     </Container>
   );

@@ -1,7 +1,7 @@
 const BASE_URL = `https://api.coinpaprika.com/v1`
 
 export async function fetchCoins() {
-  const tempCoin = [
+/*   const tempCoin = [
     {
       id: "btc-bitcoin",
       name: "Bitcoin",
@@ -184,14 +184,14 @@ export async function fetchCoins() {
     },
   ];
   await new Promise (resolve => setTimeout(resolve, 1000)) //가짜 fetch 실행 시간
-  return tempCoin
-/*   return fetch(`${BASE_URL}/coins`).then((res) =>
+  return tempCoin */
+  return fetch(`${BASE_URL}/coins`).then((res) =>
     res.json(),
-  ); */
+  );
 }
 
 export async function fetchCoinInfo(coinId: string) {
-  const tempInfo = {
+/*   const tempInfo = {
     "id": "btc-bitcoin",
     "name": "Bitcoin",
     "symbol": "BTC",
@@ -387,12 +387,12 @@ export async function fetchCoinInfo(coinId: string) {
     "last_data_at": "2024-08-24T16:41:00Z"
   }
   await new Promise((resolve) => setTimeout(resolve, 1000));
-  return tempInfo
-  //return fetch(`${BASE_URL}/coins/${coinId}`).then(res => res.json())
+  return tempInfo */
+  return fetch(`${BASE_URL}/coins/${coinId}`).then(res => res.json())
 }
 
 export async function fetchCoinTickers(coinId: string) {
-  const tempTicker = {
+/*   const tempTicker = {
     "id": "btc-bitcoin",
     "name": "Bitcoin",
     "symbol": "BTC",
@@ -425,12 +425,12 @@ export async function fetchCoinTickers(coinId: string) {
     }
   }
   await new Promise((resolve) => setTimeout(resolve, 1000));
-  return tempTicker
-  //return fetch(`${BASE_URL}/tickers/${coinId}`).then(res => res.json())
+  return tempTicker */
+  return fetch(`${BASE_URL}/tickers/${coinId}`).then(res => res.json())
 }
 
 export async function fetchCoinHistory(coinId:string) {
-  const tempTicker = [
+/*   const tempTicker = [
     {
       "time_open": 1722816000,
       "time_close": 1722817440,
@@ -643,7 +643,7 @@ export async function fetchCoinHistory(coinId:string) {
     }
   ]
   await new Promise((resolve) => setTimeout(resolve, 1000));
-  return tempTicker
-/*   return fetch(`https://ohlcv-api.nomadcoders.workers.dev?coinId=${coinId}`).then(
-    res => res.json()) */
+  return tempTicker */
+  return fetch(`https://ohlcv-api.nomadcoders.workers.dev?coinId=${coinId}`).then(
+    res => res.json())
 }

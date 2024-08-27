@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchCoinHistory } from "./api";
 import ApexCharts from "react-apexcharts";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atoms";
 
 interface IHistorical {
   time_open: number;
@@ -18,6 +20,7 @@ interface IChatPoprs {
 }
 
 function LineChart({ coinId }: IChatPoprs) {
+  const isDark = useRecoilValue(isDarkAtom)
   const { isLoading, data } = useQuery<IHistorical[]>({
     queryKey: ["ohlcv", coinId],
     queryFn: () => fetchCoinHistory(coinId),
@@ -37,7 +40,7 @@ function LineChart({ coinId }: IChatPoprs) {
           ]}
           options={{
             theme: {
-              mode: "dark",
+              mode: isDark ? "dark" : "light",
             },
             chart: {
               height: 300,
